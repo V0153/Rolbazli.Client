@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Role Based UI</title>
+  </head>
+  <body class="bg-gray-50 font-sans">
+    <!-- Navbar -->
+    <nav class="bg-orange-100 shadow-md py-4 px-6 flex items-center justify-between md:justify-center md:space-x-16 rounded-b-xl">
+      <!-- Left Logo -->
+      <div class="flex items-center space-x-2 absolute left-4 md:static">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg" alt="Logo" class="h-10 w-10 rounded-full" />
+        <span class="font-semibold text-xl text-gray-800">Role Based AUTH</span>
+      </div>
+
+      <!-- Center Home -->
+      <div class="text-center">
+        <button class="px-4 py-2 bg-orange-200 hover:bg-orange-300 text-gray-800 rounded-full shadow transition">Home</button>
+      </div>
+
+      <!-- Right Login/Register -->
+      <div class="flex items-center space-x-4 absolute right-4 md:static">
+        <button class="px-4 py-2 bg-orange-200 hover:bg-orange-300 text-gray-800 rounded-full shadow transition">Login</button>
+        <button class="px-4 py-2 bg-orange-400 hover:bg-orange-500 text-white rounded-full shadow transition">Register</button>
+      </div>
+    </nav>
+  </body>
+</html>
