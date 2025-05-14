@@ -1,38 +1,31 @@
-import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../../../services/auth.service';
+import { response } from 'express';
 
 @Component({
   selector: 'app-login',
-  imports: [RouterLink],
+  imports: [RouterLink,ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'] // Stil dosyasını kullanmıyorsanız boş bırakabilirsiniz
+  styleUrl: './login.component.scss'
 })
-export class LoginComponent {
-  email: string = '';
-  password: string = '';
+export class LoginComponent implements OnInit {
+  authService = inject(AuthService);
+  hide = true;
+  form!: FormGroup;
+  constructor(private fb: FormBuilder) { }
 
-  constructor(private router: Router) {}
-
-  // Form inputları değiştiğinde bu metod tetiklenir
-  onInputChange(event: any, field: string): void {
-    const value = event.target.value;
-    if (field === 'email') {
-      this.email = value;
-    } else if (field === 'password') {
-      this.password = value;
-    }
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
   }
-
-  // Form submit edildiğinde bu metod tetiklenir
-  onSubmit(event: Event): void {
-    event.preventDefault(); // Formun sayfayı yenilemesini engeller
-
-    // Basit bir kontrol, form verilerini doğrulamak için kullanılabilir
-    if (this.email && this.password) {
-      // Giriş başarılı ise yönlendirme
-      this.router.navigate(['/dashboard']);
-    } else {
-      alert('Lütfen tüm alanları doğru doldurduğunuzdan emin olun!');
-    }
+  ngSubmit() {
+    this.authService.login(this.form.value).subscribe((response) => {
+      console.log(response);
+      
+    })
   }
 }

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { NavbarComponent } from './components/clients/navbar/navbar.component';
-import { CommonModule } from '@angular/common';
+import { Component } from "@angular/core";
+import { NavigationEnd, Router, RouterOutlet } from "@angular/router";
+import { NavbarComponent } from "./components/clients/navbar/navbar.component";
+import { CommonModule } from "@angular/common";
+
 
 @Component({
   selector: 'app-root',
@@ -15,8 +16,8 @@ export class AppComponent {
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.showNavbar = !['admin/login' ,'admin/register'].includes(event.url);
-      }
+        this.showNavbar = !['/admin/login' ,'/admin/register'].includes(event.url);
+      };
     });
-  }
-}
+  };
+};
